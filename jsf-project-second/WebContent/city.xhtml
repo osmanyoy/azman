@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="template.xhtml">
+	<ui:define name="title">City Provisioning Page</ui:define>
+	<ui:define name="breadcrumb">City Page</ui:define>
+
+	<ui:define name="contentName">
+
+		<h:form>
+			<h:inputHidden value="#{cityBean.city.cityId}" />
+			<h:panelGrid columns="2">
+				
+				<p:outputLabel value="City Name" />
+				<p:inputText value="#{cityBean.city.cityName}" />
+
+				<p:outputLabel for="popup" value="Popup:" />
+				<p:calendar id="popup" value="#{cityBean.myDate}" pattern="dd-MM-yyyy" />
+
+				<p:outputLabel value="City Plate" />
+				<p:inputText value="#{cityBean.city.cityPlate}" />
+
+				<h:commandButton action="#{cityBean.create()}"
+					value="#{cityBean.buttonName}" />
+
+			</h:panelGrid>
+
+			<h:dataTable value="#{cityBean.cities}" var="city">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+		#{city.cityId}</h:column>
+
+				<h:column>
+					<f:facet name="header">CITY NAME </f:facet>
+		#{city.cityName}</h:column>
+				<h:column>
+					<f:facet name="header">CITY PLATE CODE</f:facet>
+		#{city.cityPlate}</h:column>
+				<h:column>
+					<f:facet name="header">ACTIONS</f:facet>
+					<h:commandButton action="#{cityBean.delete(city)}"
+						value="Delete" style="color:Red;" />
+					<h:commandButton
+						action="#{createCustomerBean.edit(cust)}" value="Edit"
+						style="color:Green;bgcolor:Yellow;" />
+
+				</h:column>
+
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="bilgi"> Bir bilgi</ui:define>
+	<ui:define name="bilgi"> Bu bir JSF eğitimi</ui:define>
+
+</ui:composition>
+</html>

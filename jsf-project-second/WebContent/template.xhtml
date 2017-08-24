@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ut="http://java.sun.com/jsf/composite/util">
+<f:view locale="en" contentType="text/html">
+	<ui:param name="contextRoot" value="#{request.contextPath}" />
+	<h:head>
+		<title><ui:insert name="title"></ui:insert></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="${contextRoot}/template01/css/bootstrap.css"
+			rel="stylesheet" />
+		<link href="${contextRoot}/template01/css/archon.css" rel="stylesheet" />
+		<link href="${contextRoot}/template01/css/font-awesome.css"
+			rel="stylesheet" />
+		<link href="${contextRoot}/template01/css/responsive.css"
+			rel="stylesheet" />
+		<link href="${contextRoot}/template01/css/bootstrap-dialog.css"
+			rel="stylesheet" />
+		<link href="${contextRoot}/template01/css/bootstrapValidator.css"
+			rel="stylesheet" />
+		<link href="${contextRoot}/template01/css/bootstrap-chosen.css"
+			rel="stylesheet" />
+		<link href="${contextRoot}/style/ALoader.css" rel="stylesheet" />
+		<link rel="shortcut icon" href="images/favicon.ico" />
+	</h:head>
+
+	<h:body>
+		#{header['accept-type']}
+		<p:ajaxStatus onstart="addAjaxWait();" oncomplete="removeAjaxWait();"></p:ajaxStatus>
+		<p:growl id="growlMsgId" life="10000"></p:growl>
+		<div class="frame" style="min-height: 1377px;">
+			<div class="sidebar">
+				<div class="wrapper">
+					<a href="deneme" class="logo"><img src="images/a.gif" alt="a" /></a>
+					<ul class="nav  nav-list">
+						<li class="nav-search">
+							<div class="form-group">
+								<input type="text" class="form-control nav-search" /> <span
+									class="input-icon fui-search" />
+							</div>
+						</li>
+						<li class="nav-header">City</li>
+						<li class="#{view.viewId == '/city.xhtml' ? 'active' : ''}"><a
+							href="city.xhtml"> <i class="null"></i> City Page
+						</a></li>
+
+						<li class="nav-header">Town</li>
+						<li class="#{view.viewId == '/town.xhtml' ? 'active' : ''}"><a
+							href="town.xhtml"> <i class="null"></i> Town Page
+						</a></li>
+
+						<li class="nav-header">Customer</li>
+						<li class="#{view.viewId == '/createUser.xhtml' ? 'active' : ''}"><a
+							href="createUser.xhtml"> <i class="null"></i> Customer Page
+								
+						</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="content" style="min-height: 432px;">
+
+				<!-- CONTENT SECTION -->
+				<!-- NAV BAR -->
+
+
+				<div class="navbar">
+					<a href="#" onclick="return false;"
+						class="btn pull-left toggle-sidebar"><i class="fa fa-list"></i></a>
+					<a class="navbar-brand" href="index.xhtml">Bilginç</a>
+					<div class="welcome">
+						<h:outputText value="Stateful Switcher:" />
+						<p:themeSwitcher style="width:165px" effect="fade"
+							id="statefulSwitcher">
+							<f:selectItem itemLabel="Choose Theme" itemValue="" />
+							<f:selectItems value="#{themeSwitcherView.themes}" />
+							<p:ajax listener="#{themeSwitcherView.saveTheme}" />
+						</p:themeSwitcher>
+
+					</div>
+				</div>
+				<!-- / Navbar-->
+				<!-- /NAV BAR -->
+				<div id="main-content">
+					<div class="row">
+						<div class="col-mod-12">
+							<ui:insert name="breadcrumb"></ui:insert>
+						</div>
+					</div>
+					<!-- Form elements -->
+					<div class="row">
+						<!-- PanelContainer -->
+						<div class="col-md-12">
+							<div class="panel panel-archon">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<ui:insert name="contentName"></ui:insert>
+									</h3>
+								</div>
+								<div class="panel-body">
+									<div class="col-md-12">
+										<ui:insert name="bilgi" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /PanelContainer -->
+					</div>
+				</div>
+			</div>
+			<!-- /CONTENT SECTION -->
+		</div>
+
+		<div id="footer" style="float: center">
+			<ui:insert name="footer" />
+		</div>
+
+
+		<!-- /SCRIPT SECTION -->
+		<!-- 		<script type="text/javascript" -->
+		<!-- 			src="${contextRoot}/template01/js/jquery-2.1.0.js"></script> -->
+		<script type="text/javascript"
+			src="${contextRoot}/template01/js/bootstrap.js"></script>
+		<script type="text/javascript"
+			src="${contextRoot}/template01/js/archon.js"></script>
+		<script type="text/javascript"
+			src="${contextRoot}/template01/js/bootstrap-dialog.js"></script>
+		<script type="text/javascript" src="${contextRoot}/script/adenon.js"></script>
+		<script type="text/javascript"
+			src="${contextRoot}/script/bulksms-ui.js"></script>
+		<script type="text/javascript"
+			src="${contextRoot}/template01/js/bootstrapValidator.js"></script>
+		<script type="text/javascript"
+			src="${contextRoot}/template01/js/chosen.jquery.js"></script>
+
+		<ui:debug hotkey="k" rendered="true" />
+	</h:body>
+</f:view>
+</html>

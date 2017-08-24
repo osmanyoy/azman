@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="template.xhtml">
+
+	<ui:define name="title">Customer Provisioning Page</ui:define>
+	<ui:define name="breadcrumb">Customer Page</ui:define>
+
+	<ui:define name="contentName">
+
+		<h:form id="customerForm">
+			<h:inputHidden value="#{createCustomerBean.id}" />
+			<h:panelGrid columns="3">
+				<h:outputText value="Name" />
+				<h:inputText id="nameInput"
+					value="#{createCustomerBean.name}" required="true"
+					requiredMessage="Bu field gerekli">
+					<f:validateRequired for="nameInput" />
+				</h:inputText>
+				<h:message for="nameInput" errorStyle="color:Red;" />
+
+				<h:outputText value="Surname" />
+				<h:inputText id="surnameInput"
+					value="#{createCustomerBean.surname}">
+					<f:validateLength minimum="3" maximum="20" />
+				</h:inputText>
+				<h:message for="surnameInput" />
+
+				<h:outputText value="Age" />
+				<h:inputText id="ageInput"
+					value="#{createCustomerBean.age}" />
+				<h:message for="ageInput" />
+
+				<p:outputLabel for="popupDate" value="Popup:" />
+				<p:calendar id="popupDate"
+					value="#{createCustomerBean.birthDate}"
+					pattern="dd-MM-yyyy" />
+				<p:message for="popupDate" />
+
+				<p:outputLabel />
+				<p:selectOneMenu id="cityId" value="#{createCustomerBean.city}">
+					<f:selectItems value="#{createCustomerBean.cities}"
+						var="ci" itemLabel="#{ci.cityName}"
+						itemValue="#{ci.cityName}" />
+				</p:selectOneMenu>
+				<p:message for="cityId" />
+
+				<h:commandButton action="#{createCustomerBean.create()}"
+					value="#{createCustomerBean.buttonName}" />
+
+			</h:panelGrid>
+
+			<ui:remove>
+				<h:inputText value="#{createCustomerBean.surname}">
+					<f:ajax event="blur" execute="@this"
+						render="@this ajaxRender surnameInput"
+						listener="#{createCustomerBean.ajaxMethod}" />
+				</h:inputText>
+			</ui:remove>
+
+			<h:dataTable value="#{createCustomerBean.customerList}"
+				var="cust">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+		#{cust.customerId}</h:column>
+
+				<h:column>
+					<f:facet name="header">NAME </f:facet>
+		#{cust.name}</h:column>
+				<h:column>
+					<f:facet name="header">SURNAME</f:facet>
+		#{cust.surname}</h:column>
+				<h:column>
+					<f:facet name="header">AGE</f:facet>
+		#{cust.age}</h:column>
+				<h:column>
+					<f:facet name="header">ACTIONS</f:facet>
+					<h:commandButton
+						action="#{createCustomerBean.delete(cust)}"
+						value="Delete" style="color:Red;" immediate="true" />
+					<h:commandButton
+						action="#{createCustomerBean.edit(cust)}" value="Edit"
+						style="color:Green;bgcolor:Yellow;" />
+
+
+				</h:column>
+
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="bilgi"> Bir bilgi</ui:define>
+	<ui:define name="bilgi"> Bu bir JSF eğitimi</ui:define>
+
+</ui:composition>
+</html>

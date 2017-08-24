@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="template.xhtml">
+	<ui:define name="title">Town Provisioning Page</ui:define>
+	<ui:define name="breadcrumb">Town Page</ui:define>
+
+	<ui:define name="contentName">
+		<h:form>
+			<p:panelGrid columns="3">
+				<p:outputLabel value="Select city : " />
+				<p:selectOneMenu id="cityId"
+					value="#{townBean.selectedCity}">
+					<f:selectItem itemLabel="Please select city" />
+					<f:selectItems value="#{townBean.cities}" var="ci"
+						itemLabel="#{ci.cityName}" itemValue="#{ci.cityId}" />
+					<p:ajax event="change" process="@this"
+						partialSubmit="true" update="townInput townDataTable"
+						onstart="alert('ajax basliyor');"
+						oncomplete="alert('ajax completed');"
+						onsuccess="alert('ajax success');"
+						onerror="alert('ajax error');" />
+				</p:selectOneMenu>
+				<p:message for="cityId" />
+
+				<p:outputLabel value="Town Name" for="townInput" />
+				<p:inputText id="townInput"
+					value="#{townBean.town.townName}"
+					disabled="#{townBean.city == null}" required="true"
+					requiredMessage="bunu girmeniz lazım">
+					<p:clientValidator event="blur" />
+				</p:inputText>
+				<p:message for="townInput" />
+
+
+				<p:commandButton value="AjaxCall" process="@form"
+					action="#{townBean.create()}" ajax="true"
+					update="townInput townDataTable" />
+				<h:commandButton action="#{townBean.create()}"
+					value="#{townBean.buttonName}" />
+
+			</p:panelGrid>
+
+			<p:panelGrid id="tablePanel">
+				<h:dataTable id="townDataTable"
+					value="#{townBean.towns}" var="town">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+		#{town.townId}</h:column>
+
+					<h:column>
+						<f:facet name="header">TOWN NAME </f:facet>
+		#{town.townName}</h:column>
+					<h:column>
+						<f:facet name="header">ACTIONS</f:facet>
+						<h:commandButton action="#{townBean.delete(town)}"
+							value="Delete" style="color:Red;" immediate="true" />
+						<h:commandButton action="#{townBean.edit(town)}"
+							value="Edit" style="color:Green;bgcolor:Yellow;"
+							immediate="true" />
+
+					</h:column>
+
+				</h:dataTable>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="bilgi"> Bir bilgi</ui:define>
+	<ui:define name="bilgi"> Bu bir JSF eğitimi</ui:define>
+
+</ui:composition>
+</html>
