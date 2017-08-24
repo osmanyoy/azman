@@ -3,10 +3,20 @@ package com.training.jsf.page.beans;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.training.jsf.dao.CityDAO;
 import com.training.jsf.dao.CustomerDAO;
@@ -17,11 +27,22 @@ import com.training.jsf.model.Customer;
 @RequestScoped
 public class CreateCustomerBean {
 	private Long id;
+	// @Size(min=2,max=12,message="Ýsim en az 2 ile 12 arasýnda olmasý lazým")
 	private String name;
+	
+	@Length(max= 12,min=2,message="2 ile 12 arasýnda olsun")
 	private String surname;
+	
+	@Max(value = 120, message = "Yaþ 12 ile 120 arasýnda olmalý")
+	@Min(value = 12, message = "Yaþ 12 ile 120 arasýnda olmalý")
 	private int age;
+	
+	@Past(message="Lütfen eski bir zaman yazýnýz")
+	@NotNull(message="{com.customer.birthdate} {deneme.prop} hdjhdjh ")
 	private Date birthDate;
 	private String city;
+
+	private String ageValidationMessage = "Yaþ 12 ile 120 arasýnda olmalý";
 
 	private String buttonName = "Create";
 
@@ -30,7 +51,15 @@ public class CreateCustomerBean {
 
 	@Inject
 	private CityDAO cityDAO;
-
+	
+	
+	@PostConstruct
+	public void init() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String messageBundleName = facesContext.getApplication().getMessageBundle();
+		
+		System.getProperties().put("deneme.prop", "1000");
+	}
 	public List<City> getCities() {
 		return this.cityDAO.getAllCities();
 	}
@@ -135,6 +164,14 @@ public class CreateCustomerBean {
 
 	public void setCity(final String city) {
 		this.city = city;
+	}
+
+	public String getAgeValidationMessage() {
+		return ageValidationMessage;
+	}
+
+	public void setAgeValidationMessage(String ageValidationMessage) {
+		this.ageValidationMessage = ageValidationMessage;
 	}
 
 }

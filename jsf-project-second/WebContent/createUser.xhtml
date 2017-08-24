@@ -14,45 +14,58 @@
 
 		<h:form id="customerForm">
 			<h:inputHidden value="#{createCustomerBean.id}" />
-			<h:panelGrid columns="3">
-				<h:outputText value="Name" />
-				<h:inputText id="nameInput"
-					value="#{createCustomerBean.name}" required="true"
-					requiredMessage="Bu field gerekli">
-					<f:validateRequired for="nameInput" />
-				</h:inputText>
-				<h:message for="nameInput" errorStyle="color:Red;" />
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Name" for="nameInput" />
+				<h:panelGroup>
+					<p:inputText id="nameInput" value="#{createCustomerBean.name}"
+						required="true" requiredMessage="Bu field gerekli"
+						validator="com.length.validation">
+						<p:clientValidator event="blur" />
+					</p:inputText>
+					<p:message for="nameInput" errorStyle="color:Red;" />
+				</h:panelGroup>
 
-				<h:outputText value="Surname" />
-				<h:inputText id="surnameInput"
-					value="#{createCustomerBean.surname}">
-					<f:validateLength minimum="3" maximum="20" />
-				</h:inputText>
-				<h:message for="surnameInput" />
+				<p:outputLabel value="Surname" for="surnameInput" />
+				<h:panelGroup>
+					<p:inputText id="surnameInput"
+						value="#{createCustomerBean.surname}">
+						<p:clientValidator event="blur" />
+					</p:inputText>
+					<p:message for="surnameInput" />
+				</h:panelGroup>
 
-				<h:outputText value="Age" />
-				<h:inputText id="ageInput"
-					value="#{createCustomerBean.age}" />
-				<h:message for="ageInput" />
+				<p:outputLabel value="Age" for="ageInput" />
+				<h:panelGroup>
 
-				<p:outputLabel for="popupDate" value="Popup:" />
-				<p:calendar id="popupDate"
-					value="#{createCustomerBean.birthDate}"
-					pattern="dd-MM-yyyy" />
-				<p:message for="popupDate" />
+					<p:inputText id="ageInput" value="#{createCustomerBean.age}"
+						required="true">
+						<p:clientValidator event="blur" />
+					</p:inputText>
+					<p:message for="ageInput" />
+				</h:panelGroup>
 
-				<p:outputLabel />
-				<p:selectOneMenu id="cityId" value="#{createCustomerBean.city}">
-					<f:selectItems value="#{createCustomerBean.cities}"
-						var="ci" itemLabel="#{ci.cityName}"
-						itemValue="#{ci.cityName}" />
-				</p:selectOneMenu>
-				<p:message for="cityId" />
+				<p:outputLabel for="popupDate" value="Birthdate : " />
+				<h:panelGroup>
 
-				<h:commandButton action="#{createCustomerBean.create()}"
-					value="#{createCustomerBean.buttonName}" />
+					<p:calendar id="popupDate" value="#{createCustomerBean.birthDate}"
+						pattern="dd-MM-yyyy" />
+					<p:message for="popupDate" />
+				</h:panelGroup>
 
-			</h:panelGrid>
+				<p:outputLabel value="City : " for="cityId" />
+				<h:panelGroup>
+					<p:selectOneMenu id="cityId" value="#{createCustomerBean.city}">
+						<f:selectItems value="#{createCustomerBean.cities}" var="ci"
+							itemLabel="#{ci.cityName}" itemValue="#{ci.cityName}" />
+					</p:selectOneMenu>
+					<p:message for="cityId" />
+				</h:panelGroup>
+
+				<p:commandButton action="#{createCustomerBean.create()}"
+					value="#{createCustomerBean.buttonName}" process="@form"
+					update="@form" validateClient="true" />
+
+			</p:panelGrid>
 
 			<ui:remove>
 				<h:inputText value="#{createCustomerBean.surname}">
@@ -62,8 +75,7 @@
 				</h:inputText>
 			</ui:remove>
 
-			<h:dataTable value="#{createCustomerBean.customerList}"
-				var="cust">
+			<h:dataTable value="#{createCustomerBean.customerList}" var="cust">
 				<h:column>
 					<f:facet name="header">ID</f:facet>
 		#{cust.customerId}</h:column>
@@ -79,12 +91,10 @@
 		#{cust.age}</h:column>
 				<h:column>
 					<f:facet name="header">ACTIONS</f:facet>
-					<h:commandButton
-						action="#{createCustomerBean.delete(cust)}"
+					<h:commandButton action="#{createCustomerBean.delete(cust)}"
 						value="Delete" style="color:Red;" immediate="true" />
-					<h:commandButton
-						action="#{createCustomerBean.edit(cust)}" value="Edit"
-						style="color:Green;bgcolor:Yellow;" />
+					<h:commandButton action="#{createCustomerBean.edit(cust)}"
+						value="Edit" style="color:Green;bgcolor:Yellow;" />
 
 
 				</h:column>

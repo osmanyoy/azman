@@ -29,6 +29,10 @@ public class TownBean implements Serializable {
 
 	private String buttonName = "Create";
 
+	private void clear() {
+		buttonName = "Create";
+		town = new Town();
+	}
 	public String delete(final Town town) {
 		this.townDAO.deleteTown(town);
 		return "town";
@@ -36,7 +40,7 @@ public class TownBean implements Serializable {
 
 	public String edit(final Town town) {
 		this.buttonName = "Update";
-
+		this.town = town;
 		return "town";
 	}
 
@@ -46,9 +50,13 @@ public class TownBean implements Serializable {
 
 	public void create() {
 		this.town.setCity(this.city);
-		this.townDAO.saveTown(this.town);
+		if (town.getTownId() > 0) {
+			this.townDAO.updateTown(this.town);
+		} else {
+			this.townDAO.saveTown(this.town);
+		}
 		this.town = new Town();
-
+		clear();
 	}
 
 	public List<City> getCities() {
@@ -89,6 +97,7 @@ public class TownBean implements Serializable {
 		} else {
 			this.city = null;
 		}
+		
 		this.selectedCity = selectedCity;
 	}
 

@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
- <display-name>jsf-project-second</display-name>
- 
-  <welcome-file-list>
-    <welcome-file>createUser.xhtml</welcome-file>
-  </welcome-file-list>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+	<display-name>jsf-project-second</display-name>
 
- </web-app>
+	<welcome-file-list>
+		<welcome-file>createUser.xhtml</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+</web-app>

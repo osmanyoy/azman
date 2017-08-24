@@ -9,7 +9,7 @@
 	<ui:define name="breadcrumb">Town Page</ui:define>
 
 	<ui:define name="contentName">
-		<h:form>
+		<h:form id="formId">
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Select city : " />
 				<p:selectOneMenu id="cityId"
@@ -36,36 +36,34 @@
 				<p:message for="townInput" />
 
 
-				<p:commandButton value="AjaxCall" process="@form"
+				<p:commandButton id="submitButton" value="#{townBean.buttonName}" process="@form"
 					action="#{townBean.create()}" ajax="true"
 					update="townInput townDataTable" />
-				<h:commandButton action="#{townBean.create()}"
-					value="#{townBean.buttonName}" />
 
 			</p:panelGrid>
 
-			<p:panelGrid id="tablePanel">
-				<h:dataTable id="townDataTable"
+				<p:dataTable id="townDataTable"
 					value="#{townBean.towns}" var="town">
-					<h:column>
+					<p:column>
 						<f:facet name="header">ID</f:facet>
-		#{town.townId}</h:column>
+		#{town.townId}</p:column>
 
-					<h:column>
+					<p:column>
 						<f:facet name="header">TOWN NAME </f:facet>
-		#{town.townName}</h:column>
-					<h:column>
+		#{town.townName}</p:column>
+					<p:column>
 						<f:facet name="header">ACTIONS</f:facet>
-						<h:commandButton action="#{townBean.delete(town)}"
-							value="Delete" style="color:Red;" immediate="true" />
-						<h:commandButton action="#{townBean.edit(town)}"
+						<p:commandButton action="#{townBean.delete(town)}"
+							value="Delete" style="color:Red;"
+							update="townDataTable" process="@this"
+							ajax="true" partialSubmit="true" />
+						<p:commandButton action="#{townBean.edit(town)}"
 							value="Edit" style="color:Green;bgcolor:Yellow;"
-							immediate="true" />
+							update="formId:townInput formId:submitButton" process="@this" ajax="true" />
 
-					</h:column>
+					</p:column>
 
-				</h:dataTable>
-			</p:panelGrid>
+				</p:dataTable>
 		</h:form>
 	</ui:define>
 
