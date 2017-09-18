@@ -1,0 +1,13 @@
+                <datasource jta="true" jndi-name="java:jboss/datasources/mysqlDS" pool-name="mysqlPool" enabled="true" use-java-context="true" use-ccm="true">
+                    <connection-url>jdbc:mysql://127.0.0.1:3306/test</connection-url>
+                    <driver>mysql</driver>
+                    <security>
+                        <user-name>root</user-name>
+                    </security>
+                </datasource>
+                <drivers>
+                    <driver name="mysql" module="com.mysqlserver.mysql"/>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
