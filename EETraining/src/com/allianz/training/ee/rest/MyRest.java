@@ -1,5 +1,8 @@
 package com.allianz.training.ee.rest;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,6 +17,9 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/myrest")
 public class MyRest {
+	
+	@PersistenceContext(unitName="EETraining")
+	private EntityManager manager;
 
 	@GET
 	public String helloWorld() {
@@ -46,6 +52,17 @@ public class MyRest {
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Employee method3(Employee empIn) {
+		
+		EntityTransaction transaction = manager.getTransaction();
+		transaction.begin();
+		try {
+			manager.persist(empIn);
+			transaction.commit();
+		} catch (Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+		} 
+		
 		Employee employee = new Employee();
 		employee.setName(empIn.getName());
 		employee.setSurname(empIn.getSurname());

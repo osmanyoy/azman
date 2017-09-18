@@ -1,5 +1,8 @@
 package com.allianz.training.ee.rest;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorOrder;
@@ -12,7 +15,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)
+@Entity
 public class Employee {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
 	@XmlElement(name="isim",nillable=false,required=true)
 	private String name;
 	private String surname;
@@ -22,6 +31,14 @@ public class Employee {
 	@XmlTransient
 	private String test = "test";
 	
+	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
