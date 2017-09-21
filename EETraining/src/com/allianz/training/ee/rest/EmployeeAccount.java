@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class EmployeeAccount {
@@ -17,6 +18,7 @@ public class EmployeeAccount {
 	private String accountName;
 	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@XmlTransient
 	private Employee employee;
 	
 	

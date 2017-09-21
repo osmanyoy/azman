@@ -1,5 +1,6 @@
 package com.allianz.training.ee.rest;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,6 +8,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
@@ -24,16 +28,20 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.allianz.training.ee.ejb.TrainingDAO;
+import com.sun.jndi.url.corbaname.corbanameURLContextFactory;
 
 @Path("/myrest")
 public class MyRest {
+	
+	@Inject
+	private CheckEmployee checkEmployee;
 
 	@EJB
 	private TrainingDAO trainingDAO;
 	
 	@GET
 	public String helloWorld() {
-		return "Hello Osman";
+		return "Hello Osman " ;
 	}
 
 	@POST
@@ -103,7 +111,12 @@ public class MyRest {
 		empIn.setUsername("osman");
 		empIn.setPassword("123");
 		
-		trainingDAO.writeEmployee(empIn);
+		try {
+			trainingDAO.writeEmployee(empIn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Employee employee = new Employee();
 		employee.setName(empIn.getName());
