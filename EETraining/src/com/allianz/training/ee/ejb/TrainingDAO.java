@@ -36,8 +36,8 @@ public class TrainingDAO {
 	@Resource
 	private EJBContext context;
 
-	@Resource
-	private UserTransaction ut;
+//	@Resource
+//	private UserTransaction ut;
 
 	@PersistenceContext(unitName = "EETraining")
 	private EntityManager manager;
@@ -49,6 +49,7 @@ public class TrainingDAO {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Transactional(dontRollbackOn= {IllegalAccessError.class})
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void writeEmployee(Employee employee) throws Exception {
 		manager.persist(employee);

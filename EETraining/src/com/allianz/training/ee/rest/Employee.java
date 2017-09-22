@@ -33,6 +33,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorOrder;
@@ -42,19 +43,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-@NamedQueries({
-	@NamedQuery(name="employeeSelectAll",query="select e from Employee e"),
-	@NamedQuery(name="employeeSelectAllByNameParameter",query="select e from Employee e where e.name = :nm"),
-	@NamedQuery(name="employeeSelectAllByNameIndex",query="select e from Employee e where e.name = ?1")
-	
+@NamedQueries({ @NamedQuery(name = "employeeSelectAll", query = "select e from Employee e"),
+		@NamedQuery(name = "employeeSelectAllByNameParameter", query = "select e from Employee e where e.name = :nm"),
+		@NamedQuery(name = "employeeSelectAllByNameIndex", query = "select e from Employee e where e.name = ?1")
+
 })
-@NamedNativeQueries({
-	@NamedNativeQuery(name="selectFromEmployee",query="select * from calisan where name= :nm")
-})
+@NamedNativeQueries({ @NamedNativeQuery(name = "selectFromEmployee", query = "select * from calisan where name= :nm") })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Calisan", namespace = "http://common.allainz.com", propOrder = { "isim", "soyisim", "age", "gender",
-		"address", "birthdate", "employeeExtra", "test", "username", "password", "accounts" })
+// @XmlType(name = "Calisan", namespace = "http://common.allainz.com", propOrder
+// = { "isim", "soyisim", "age", "gender",
+// "address", "birthdate", "employeeExtra", "test", "username", "password",
+// "accounts" })
 @Entity
 @Table(name = "calisan")
 @SecondaryTable(name = "calisan_info")
@@ -68,8 +68,11 @@ public class Employee {
 	@XmlElement(name = "isim", nillable = false, required = true)
 	private String name;
 
+	@Size(min = 3, max = 50, message = "soyisim yanlýþ")
+	
 	@Column(name = "soyisim", nullable = false, length = 50)
 	private String surname;
+
 	private int age;
 	@Enumerated(EnumType.STRING)
 	private EGender gender;

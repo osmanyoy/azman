@@ -28,14 +28,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.allianz.training.ee.ejb.TrainingDAO;
-import com.sun.jndi.url.corbaname.corbanameURLContextFactory;
 
 @Path("/myrest")
 public class MyRest {
 	
-	@Inject
-	private CheckEmployee checkEmployee;
-
 	@EJB
 	private TrainingDAO trainingDAO;
 	

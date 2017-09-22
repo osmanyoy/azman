@@ -14,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.allianz.training.ee.rest.Employee;
-import com.sun.org.apache.xml.internal.security.Init;
 
 /**
  * Session Bean implementation class SessionEJB
