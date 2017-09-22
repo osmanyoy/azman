@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.validation.constraints.Size;
+import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -36,8 +38,8 @@ public class MyRest {
 	private TrainingDAO trainingDAO;
 	
 	@GET
-	public String helloWorld() {
-		return "Hello Osman " ;
+	public String helloWorld(@Size(min=5,message="name en az 5 olmalý") @QueryParam("name") String name) {
+		return "Hello " + name;
 	}
 
 	@POST

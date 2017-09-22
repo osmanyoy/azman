@@ -33,6 +33,11 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -42,6 +47,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @NamedQueries({ @NamedQuery(name = "employeeSelectAll", query = "select e from Employee e"),
 		@NamedQuery(name = "employeeSelectAllByNameParameter", query = "select e from Employee e where e.name = :nm"),
@@ -69,15 +76,19 @@ public class Employee {
 	private String name;
 
 	@Size(min = 3, max = 50, message = "soyisim yanlýþ")
-	
+	// @Pattern(regexp="\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b")
 	@Column(name = "soyisim", nullable = false, length = 50)
 	private String surname;
 
+	@Min(value=3)
+	@Max(value=120)
 	private int age;
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private EGender gender;
 
 	@Temporal(TemporalType.DATE)
+	@Past(message="Please enter old date !")
 	private Date birthdate;
 
 	@Embedded

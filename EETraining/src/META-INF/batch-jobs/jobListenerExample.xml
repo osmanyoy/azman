@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<job id="jobListenerExample" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
-    <listeners>
-        <listener ref="myJobListener"/>
-    </listeners>
-    <step id="myStep" next="step2">
-        <listeners>
-            <listener ref="myStepListener"/>
-            <listener ref="myChunkListener"/>
-            <listener ref="myItemReadListener"/>
-            <listener ref="myItemProcessorListener"/>
-            <listener ref="myItemWriteListener"/>
-        </listeners>
-        <chunk item-count="3">
-            <reader ref="myItemReader"/> 
-            <processor ref="myItemProcessor"/>
-            <writer ref="myItemWriter"/> 
-        </chunk>
-    </step>
-        <step id="step2" >
-        <batchlet ref="myBatchlet"/>
-    </step>
-    
+<job id="jobListenerExample" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	version="1.0">
+	<listeners>
+		<listener ref="myJobListener" />
+	</listeners>
+	<step id="myStep" next="step2">
+		<listeners>
+			<listener ref="myStepListener" />
+			<listener ref="myChunkListener" />
+			<listener ref="myItemReadListener" />
+			<listener ref="myItemProcessorListener" />
+			<listener ref="myItemWriteListener" />
+		</listeners>
+		<chunk item-count="6">
+			<reader ref="myItemReader" />
+			<processor ref="myItemProcessor" />
+			<writer ref="myItemWriter" />
+		</chunk>
+	</step>
+	<step id="step2">
+		<batchlet ref="myBatchlet" />
+	</step>
+
 </job>
 
