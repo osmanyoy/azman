@@ -12,11 +12,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import com.allianz.training.wire.ExecuteChooser;
 import com.allianz.training.wire.IExecute;
 
 @SpringBootApplication(scanBasePackages= {"com.allianz","org.allianz"})
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SpringtrainingApplication implements ApplicationRunner {
 	
 	private Person person;
