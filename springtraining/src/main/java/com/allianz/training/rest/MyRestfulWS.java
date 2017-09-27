@@ -37,7 +37,7 @@ public class MyRestfulWS {
 		return "hello";
 	}
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/hello2", method = RequestMethod.GET)
     public String helloWorld2() {
         return "hello";

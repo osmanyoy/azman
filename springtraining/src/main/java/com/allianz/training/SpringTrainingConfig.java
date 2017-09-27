@@ -7,9 +7,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @Configuration
 public class SpringTrainingConfig {
+    
+    // @Autowired
+    // private Person person;
+    //
+    // @Autowired
+    // public SpringTrainingConfig(AuthenticationManagerBuilder managerBuilder,
+    // CustomUserDetails cud) {
+    // }
 
     @Autowired
-    public void configAuthantication(AuthenticationManagerBuilder managerBuilder,
+    public void xyzw(AuthenticationManagerBuilder managerBuilder,
             CustomUserDetails cud) throws Exception {
         // managerBuilder.inMemoryAuthentication()
         // .withUser("osman")
