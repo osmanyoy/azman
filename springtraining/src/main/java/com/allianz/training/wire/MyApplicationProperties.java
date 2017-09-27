@@ -3,6 +3,8 @@ package com.allianz.training.wire;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="com.allianz.prop",ignoreUnknownFields=true)
 public class MyApplicationProperties {
     
+    @NotNull
     private String server;
     private String port;
     private String application;
