@@ -1,5 +1,7 @@
 package com.allianz.training.cloud;
 
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,10 +21,22 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 @RestController
 @EnableFeignClients
 @EnableCircuitBreaker
+@EnableRabbit
 public class ConsumerfeignApplication {
 
     @Autowired
+    private RabbitTemplate rt;
+
+    @Autowired
     private IMyConsumer cons;
+
+    @RequestMapping(method = RequestMethod.GET, path = "/rabbit")
+    public String sendMessageToRabbitMQ() {
+        this.rt.convertAndSend("myexchange",
+                               "producer",
+                               "Hello from consumerfeign");
+        return "OK";
+    }
 
     @RequestMapping(method = RequestMethod.GET, path = "/produce")
     @HystrixCommand(fallbackMethod = "callProducerFallback", commandProperties = @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"))
