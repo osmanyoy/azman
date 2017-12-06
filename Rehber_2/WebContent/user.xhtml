@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="template.xhtml">
+
+
+	<ui:define name="title">
+			${cmsg['rehber.management.page']}
+		</ui:define>
+
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><a href="home.xhtml">${cmsg['rehber.home.page']}</a></li>
+			<li><a href="#">${cmsg['rehber.management.page']}</a></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="contentName">
+		${cmsg['rehber.management.page']} <span class="pull-right"> </span>
+	</ui:define>
+
+
+	<ui:define name="bilgi">
+		<script type="text/javascript">
+
+	function check() {
+		var checkedRows = PF('userTable').getSelectedRowsCount();
+		if (checkedRows == 0) {
+			alert('please select at least one item !');
+			return false;
+		}
+		return true;
+	}
+
+
+</script>
+		<h:form>
+			<p:contextMenu for="userTableId">
+				<p:menuitem value="update" icon="ui-icon-extlink" action="#{userBean.action('update')}" oncomplete="PF('addNewUser').show()" update="@(#addNewFormId)"></p:menuitem>
+				<p:menuitem value="delete" icon="ui-icon-close" onclick="if (confirm('are you really want to delete selected user?') == false) return false;"
+					update="@(#userTableId)" action="#{userBean.deleteUser}">
+				</p:menuitem>
+			</p:contextMenu>
+
+			<p:dataTable id="userTableId" value="#{userBean.userList}" var="user" emptyMessage="There is no item in user list" rowKey="#{user.uuid}"
+				selection="#{userBean.selectedUserList}" rowIndexVar="rowIndex" filterEvent="enter" paginator="true" rowsPerPageTemplate="10,20,30" rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				widgetVar="userTable">
+
+				<p:ajax event="contextMenu" listener="#{userBean.onRowSelect}"></p:ajax>
+
+				<f:facet name="header">
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton value="add new user" ajax="true" action="#{userBean.action('add')}" oncomplete="PF('addNewUser').show()"
+								update=":addNewFormId,:growlMsgId">
+							</p:commandButton>
+						</f:facet>
+						<f:facet name="right">
+							<p:commandButton value="delete users" ajax="true" action="#{userBean.deleteUsers}" update="userTableId,:growlMsgId"
+								onclick="if (!check()){ return false; }; if(!confirm('are you sure want to delete all selected users?')){ return false };">
+							</p:commandButton>
+						</f:facet>
+					</p:toolbar>
+				</f:facet>
+
+				<p:column selectionMode="multiple" style="width : 32px;"></p:column>
+
+				<p:column headerText="Name" sortBy="#{user.name}" filterBy="#{user.name}">
+					<h:outputText value="#{user.name}" title="name" />
+				</p:column>
+
+				<p:column headerText="Surname" sortBy="#{user.surname}" filterBy="#{user.surname}">
+					<h:outputText value="#{user.surname}" title="surname" />
+				</p:column>
+
+				<p:column headerText="Email" filterBy="#{user.email}">
+					<h:outputText value="#{user.email}" title="email" />
+				</p:column>
+
+				<p:column headerText="Username" filterBy="#{user.username}">
+					<h:outputText value="#{user.username}" title="username" />
+				</p:column>
+
+				<p:column headerText="Phone" filterBy="#{user.phone}">
+					<h:outputText value="#{user.phone}" title="Mobile number" />
+				</p:column>
+
+				<p:column headerText="Role" filterBy="#{role_id}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('userTable').filter()">
+							<f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+							<f:selectItems value="#{userBean.roles}" />
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{user.role}" title="User role" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+		<ui:include src="addNewUser.xhtml" />
+
+	</ui:define>
+
+	<ui:define name="footer">
+			JSF eğitimi
+	</ui:define>
+
+</ui:composition>
+</html>

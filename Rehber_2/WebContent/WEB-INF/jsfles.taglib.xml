@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib version="2.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
+	<namespace>http://bilginc.jsf.org/tags</namespace>
+	<tag>
+		<tag-name>menuentry</tag-name>
+		<source>tags/menuentry.xhtml</source>
+		<attribute>
+			<description>Page Url variable</description>
+			<name>pageUrl</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Page Name variable</description>
+			<name>pageName</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Page Icon variable</description>
+			<name>pageIcon</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>inputcom</tag-name>
+		<source>tags/InputCom.xhtml</source>
+		<attribute>
+			<description>Id variable</description>
+			<name>id</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>label variable</description>
+			<name>label</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>label variable</description>
+			<name>min</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>label variable</description>
+			<name>max</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>value variable</description>
+			<name>value</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<tag-name>ccmenui</tag-name>
+		<component>
+			<component-type>com.rehber.menuitem</component-type>
+			<renderer-type>com.rehber.menurenderer</renderer-type>
+		</component>
+		<attribute>
+			<description>Page Url variable</description>
+			<name>pageUrl</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Page Name variable</description>
+			<name>pageName</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Page Icon variable</description>
+			<name>pageIcon</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+</facelet-taglib>

@@ -1,0 +1,276 @@
+@CHARSET "UTF-8";
+
+.validityTime {
+	width: 50px !important;
+}
+
+.bulksmsOuterPanel {
+	width: 500px;
+}
+
+#smsSettingsDiv {
+	margin-top: 7px;
+	margin-left: 5px;
+	display: none;
+}
+
+#wapPushSettingsDiv {
+	margin-top: 7px;
+	margin-left: 5px;
+	display: none;
+}
+
+#smsSettingsDiv .labelColumn {
+	text-align: left;
+}
+
+#bulksmsButtons {
+	border-top: 1px solid #a0a0a0;
+	padding-top: 4px;
+}
+
+.bulksmsForm {
+	width: 620px;
+	margin: 20px;
+}
+
+.longText {
+	width: 392px;
+}
+
+.bulksmsForm textarea {
+	width: 384px;
+}
+
+.bulksmsForm .labelColumn {
+	min-width: 80px;
+}
+
+#scheduleSettingsDiv {
+	display: none;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.jobScheduleTime {
+	margin-left: 20px;
+	margin-top: 3px;
+	display: none;
+}
+
+.jobList {
+	border: 0 !important;
+}
+
+.jobList .jobItemSummary table {
+	margin-left: -9px;
+}
+
+.jobList .jobItemSummary {
+	font-size: 13px;
+}
+
+.jobListOuterPanel {
+	width: 750px;
+}
+
+.jobProgressColumn {
+}
+
+.jobPriorityColumn {
+	width: 120px;
+	vertical-align: top;
+	padding-top: 4px;
+	float: right;
+}
+
+.jobActionsColumn {
+	vertical-align: top;
+	padding-top: 4px;
+	padding-left: 40px;
+	width: 130px;
+}
+
+.listItemActions input[type=submit],.listItemActions input[type=button],.listItemActions button
+	{
+	padding: 1px !important;
+	min-width: 90px;
+}
+
+.jobCreationModalButtons
+	input[type=submit],.jobCreationModalButtons input[type=button] {
+	font-size: x-small !important;
+	height: 25px !important;
+}
+
+.completedJobGreenTitle {
+	font-size: 13px !important;
+	color: green !important;
+}
+
+.completedJobRedTitle {
+	font-size: 13px !important;
+	color: red !important;
+}
+
+.jobItemSummary {
+	margin-left: 10px;
+}
+
+.jobTitle {
+	font-size: 14px;
+	color: #404040;
+	margin-bottom: 3px;
+}
+
+.jobProgressBar:HOVER {
+	cursor: pointer;
+	background-color: #E9064A !important;
+}
+
+.WaterMarkedTextBox {
+	height: 16px;
+	width: 168px;
+	padding: 2px 2 2 2px;
+	border: 1px solid #BEBEBE;
+	background-color: #F0F8FF;
+	color: gray;
+	font-size: 8pt;
+	text-align: center;
+}
+
+.WaterMarkedTextBoxPSW {
+	background-position: center;
+	height: 16px;
+	width: 168px;
+	padding: 2px 2 2 2px;
+	border: 1px solid #BEBEBE;
+	background-color: #F0F8FF;
+	color: white;
+	vertical-align: middle;
+	text-align: right;
+	background-image: url(Images/psw_wMark.png);
+	background-repeat: no-repeat;
+}
+
+.NormalTextBox {
+	height: 16px;
+	width: 168px;
+}
+
+#workingTimesSettingsDiv {
+	display: none;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.testButton {
+	width: 100px;
+	margin-right: 10px;
+}
+
+.jobList .rf-dg-c {
+	border-bottom: 0;
+	border-right: 0;
+}
+
+.listItemActions .imageLink img {
+	margin-right: 4px;
+}
+
+.prioritySelect {
+	min-width: 90px !important;
+}
+
+.jobStateLabel {
+	display: block;
+	float: left;
+	font-size: 10pt !important;
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+.changePriorityLink {
+	display: block;
+	float: right;
+	margin-right: 25px;
+	font-size: 9pt !important;
+}
+
+.selectTemplateLink {
+	display: block;
+	float: right;
+	margin-top: 2px;
+	font-size: 9pt !important;
+}
+
+.viewRecordsTable .rf-dt-c {
+	text-align: center !important;
+}
+
+.statisticsTable {
+	margin-left: 0px;
+}
+
+.statisticsTable table {
+	width:980px !important;
+}
+
+.activeJobProgressDetail {
+	margin-left: 12px;
+	margin-top: -4px;
+}
+
+.rf-msg-inf,.rf-msgs-inf {
+	background-image: url(/bulksms-web/images/validUserName.png) !important;
+	color: black;
+}
+
+.jqplot-meterGauge-label {
+	font-size: 10pt !important;
+	color: #707;
+}
+
+.statusComponentColumn {
+	font-size: 10pt !important;
+}
+
+#excelMessagePreviewDiv {
+	width: 400px;
+	margin-top: 3px;
+	padding-left: 3px;
+	color: #606060;
+}
+
+.addFieldButton .ui-button-text {
+	font-size: 11px;
+	margin-left: 15px;
+}
+
+.smsLengthNote {
+	font-style: italic;
+	font-size: 10pt;
+	width: 400px;
+	text-align: justify;
+	color: #606060;
+}
+
+.dataTableToolbar{
+	width:975px;
+	margin-left:-7px;
+	
+}
+
+.ui-toolbar .ui-button {
+	text-align: right;
+}
+
+.ui-toolbar .ui-button .ui-button-text {
+	margin-right: 5px;
+	
+}
+
+
+.ui-datatable .ui-sortable-column div.ui-dt-c {
+	padding-right: 15px !important;
+}

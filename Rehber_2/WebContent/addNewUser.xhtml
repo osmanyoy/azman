@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bilginc.jsf.org/tags">
+
+	<style type="text/css">
+.el_left {
+	padding-right: 20px;
+	padding-bottom: 10px;
+}
+
+.el_right {
+	padding-bottom: 10px;
+}
+</style>
+
+	<p:dialog id="addnewuserId" widgetVar="addNewUser" modal="true"
+		width="600" header="User">
+		<h:form id="addNewFormId" prependId="false">
+			<h:inputHidden value="#{userBean.user.uuid}" />
+			<h:panelGrid id="myGrid" columns="2" columnClasses="el_left,el_right">
+				<p:outputLabel></p:outputLabel>
+				<p:messages autoUpdate="true"></p:messages>
+
+				<b:inputcom id="nameId" value="#{userBean.user.name}"	label="name" min="5" max="15"/>
+				<b:inputcom id="surnameId" value="#{userBean.user.surname}"	label="Surname" min="5" max="15"/>
+				<b:inputcom id="usernameId" value="#{userBean.user.username}"	label="Username" min="5" max="15"/>
+				<b:inputcom id="a" min="1" max="10" value="" label="osman"></b:inputcom>
+
+				<p:outputLabel value="Password" for="passwordId"
+					rendered="#{userBean.actionName == 'add'}" />
+				<h:panelGroup>
+					<h:inputSecret id="passwordId" value="#{userBean.user.username}"
+						required="true" rendered="#{userBean.actionName == 'add'}"
+						style="width:240px;" validator="com.rehber.password">
+						<p:clientValidator event="blur"></p:clientValidator>
+					</h:inputSecret>
+					<p:message for="passwordId" display="tooltip"></p:message>
+				</h:panelGroup>
+
+				<p:outputLabel value="RE Password" for="repasswordId"
+					rendered="#{userBean.actionName == 'add'}" />
+				<h:panelGroup>
+					<h:inputSecret id="repasswordId" value="#{userBean.user.username}"
+						rendered="#{userBean.actionName == 'add'}" style="width:240px;"
+						required="true">
+						<p:clientValidator event="blur"></p:clientValidator>
+					</h:inputSecret>
+					<p:message for="repasswordId" display="tooltip"></p:message>
+				</h:panelGroup>
+
+				<p:outputLabel value="Phone" for="mobileNumber"></p:outputLabel>
+				<h:panelGroup>
+					<p:inputMask id="mobileNumber" label="Phone number"
+						mask="0(999) 999 9999" value="#{userBean.user.phone}"
+						required="true" style="width:240px;">
+						<p:clientValidator event="blur" />
+					</p:inputMask>
+					<p:message for="mobileNumber" display="tooltip"></p:message>
+				</h:panelGroup>
+
+				<p:outputLabel value="City" for="cityId"></p:outputLabel>
+				<p:selectOneMenu id="cityId" value="#{userBean.user.city}"
+					style="width:240px;"
+					valueChangeListener="#{userBean.handleValueChange}">
+					<f:valueChangeListener
+						type="com.java.rehber.bean.SelectValueChangeListener" />
+					<f:selectItem itemValue="-1" itemLabel="Please select" />
+					<f:selectItems var="city" value="${userBean.cities}"
+						itemValue="#{city.cityCode}" itemLabel="#{city.cityName}" />
+					<p:clientValidator event="blur" />
+					<p:ajax event="change" listener="#{userBean.selectAjax}"
+						process="@this" partialSubmit="true" />
+					<p:ajax event="change" process="@form" update="myGrid"
+						partialSubmit="true" />
+				</p:selectOneMenu>
+
+				<p:outputLabel id="extraLabelId" value="Extra" for="extraId"
+					rendered="#{userBean.user.city == 34}"></p:outputLabel>
+				<p:inputText id="extraId" value="#{userBean.user.extra}"
+					rendered="#{userBean.user.city == 34}" style="width:240px;"></p:inputText>
+
+				<p:outputLabel id="roleLabelId" value="Role" for="roleId"></p:outputLabel>
+				<p:selectOneMenu id="roleId" value="#{userBean.user.role}"
+					style="width:240px;">
+					<f:selectItems var="role" value="${userBean.user.roles}"
+						itemValue="#{role}" itemLabel="#{role}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Email" for="emailId"></p:outputLabel>
+				<h:panelGroup>
+					<p:inputText id="emailId" value="#{userBean.user.email}"
+						required="true" style="width:240px;">
+						<p:clientValidator event="blur"></p:clientValidator>
+						<f:validateRegex
+							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}" />
+					</p:inputText>
+					<p:message for="emailId" display="tooltip"></p:message>
+				</h:panelGroup>
+
+
+			</h:panelGrid>
+			<h:panelGroup style="float :right;">
+				<p:commandButton id="cancelButtonId" value="cancel"
+					onclick="PF('addNewUser').hide(); return false;"></p:commandButton>
+				<p:commandButton id="addButtonId" value="#{userBean.actionName}"
+					action="#{userBean.addUpdateUser}" ajax="true"
+					onstart="addAjaxWait();" validateClient="true"
+					oncomplete="removeAjaxWait(); if (!args.validationFailed) {PF('addNewUser').hide();}"
+					update="@form,@(#userTableId)"
+					actionListener="#{userBean.listenAction}"></p:commandButton>
+
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>
